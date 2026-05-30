@@ -1,8 +1,6 @@
 """Tests for search module: prompt assembly and doc formatting."""
 import sys
 import os
-import pytest
-from unittest.mock import MagicMock
 from langchain_core.documents import Document
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))

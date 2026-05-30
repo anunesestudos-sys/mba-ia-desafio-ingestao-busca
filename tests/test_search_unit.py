@@ -1,7 +1,6 @@
 """Unit tests for search_prompt initialization and error handling."""
 import sys
 import os
-import pytest
 from unittest.mock import patch, MagicMock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))

@@ -1,9 +1,7 @@
 """Unit tests for the interactive chat loop."""
 import sys
 import os
-import pytest
 from unittest.mock import patch, MagicMock
-from io import StringIO
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 import chat

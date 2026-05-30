@@ -20,7 +20,6 @@ LATENCY_LIMIT_SECONDS = 30
 class TestQueryLatency:
     def test_single_query_under_latency_limit(self):
         """Consulta end-to-end deve completar em menos de 30 segundos."""
-        from search import search_prompt
         chain = search_prompt()
         start = time.time()
         chain.invoke("Quais empresas estão listadas?")
@@ -30,7 +29,6 @@ class TestQueryLatency:
 
     def test_three_sequential_queries_average_latency(self):
         """Média de 3 consultas sequenciais deve ser menor que o limite."""
-        from search import search_prompt
         chain = search_prompt()
         times = []
         for q in ["Quais empresas?", "Quais valores?", "Qual é a capital da França?"]:
@@ -46,7 +44,6 @@ class TestQueryLatency:
 class TestEmbeddingQuality:
     def test_similar_queries_return_overlapping_results(self):
         """Perguntas semanticamente similares devem recuperar chunks em comum."""
-        from search import search_prompt, _format_docs
         import search as s
 
         embeddings = s.GoogleGenerativeAIEmbeddings(model=s.EMBEDDING_MODEL)
@@ -65,7 +62,6 @@ class TestEmbeddingQuality:
 
     def test_different_queries_return_different_results(self):
         """Perguntas semanticamente diferentes devem ter baixo overlap."""
-        from search import search_prompt
         import search as s
 
         embeddings = s.GoogleGenerativeAIEmbeddings(model=s.EMBEDDING_MODEL)

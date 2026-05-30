@@ -1,5 +1,4 @@
 """Tests for PDF ingestion: chunking and loading logic."""
-import pytest
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
