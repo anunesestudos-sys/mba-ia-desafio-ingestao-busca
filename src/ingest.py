@@ -15,6 +15,7 @@ EMBEDDING_MODEL = os.getenv("GOOGLE_EMBEDDING_MODEL", "models/embedding-001")
 
 
 def ingest_pdf():
+    """Load PDF, split into chunks of 1000 chars / 150 overlap, embed and store in PGVector."""
     if not PDF_PATH:
         print("Erro: PDF_PATH não configurado no .env")
         sys.exit(1)

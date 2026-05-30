@@ -2,6 +2,7 @@ from search import search_prompt
 
 
 def main():
+    """Start the interactive RAG chat loop. Type 'sair' or Ctrl+C to exit."""
     print("=" * 60)
     print("  RAG Chat - Consulta de Documentos PDF")
     print("=" * 60)

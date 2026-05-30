@@ -41,10 +41,12 @@ RESPONDA A "PERGUNTA DO USUÁRIO"
 
 
 def _format_docs(docs):
+    """Concatenate document page_content with double newline separator."""
     return "\n\n".join(doc.page_content for doc in docs)
 
 
 def search_prompt():
+    """Build and return the RAG chain: retriever (k=10) | prompt | LLM | str parser."""
     try:
         embeddings = GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL)
 
