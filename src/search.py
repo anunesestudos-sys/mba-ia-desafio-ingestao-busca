@@ -22,6 +22,9 @@ REGRAS:
   "Não tenho informações necessárias para responder sua pergunta."
 - Nunca invente ou use conhecimento externo.
 - Nunca produza opiniões ou interpretações além do que está escrito.
+- Você PODE realizar cálculos matemáticos (somas, médias, contagens) sobre
+  valores e dados presentes no CONTEXTO. Isso não é invenção — é processamento
+  dos dados fornecidos.
 
 EXEMPLOS DE PERGUNTAS FORA DO CONTEXTO:
 Pergunta: "Qual é a capital da França?"
@@ -59,7 +62,7 @@ def search_prompt():
         retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
 
         prompt = PromptTemplate.from_template(PROMPT_TEMPLATE)
-        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.1)
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0.1)
 
         chain = (
             {

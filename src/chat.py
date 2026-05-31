@@ -1,4 +1,29 @@
+import threading
+import time
 from search import search_prompt
+
+FRAMES = ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"]
+
+STAGES = [
+    (0.0,  "🔍 Estou buscando os dados"),
+    (1.2,  "🤔 Estou pensando"),
+    (2.4,  "🔢 Estou calculando"),
+]
+
+
+def _loading(stop: threading.Event) -> None:
+    start = time.time()
+    i = 0
+    while not stop.is_set():
+        elapsed = time.time() - start
+        label = STAGES[0][1]
+        for threshold, msg in STAGES:
+            if elapsed >= threshold:
+                label = msg
+        print(f"\r{label} {FRAMES[i % len(FRAMES)]}   ", end="", flush=True)
+        time.sleep(0.1)
+        i += 1
+    print("\r" + " " * 50 + "\r", end="", flush=True)
 
 
 def main():
@@ -35,9 +60,20 @@ def main():
                 print("  ajuda / help - Exibe esta mensagem")
                 continue
 
+            stop = threading.Event()
+            loader = threading.Thread(target=_loading, args=(stop,), daemon=True)
+            loader.start()
+
             print("\nAssistente: ", end="", flush=True)
-            response = chain.invoke(question)
-            print(response)
+            first = True
+            for chunk in chain.stream(question):
+                if first:
+                    stop.set()
+                    loader.join()
+                    print("\nAssistente: ", end="", flush=True)
+                    first = False
+                print(chunk, end="", flush=True)
+            print()
 
         except (KeyboardInterrupt, EOFError):
             print("\n\nEncerrando chat. Até logo!")
