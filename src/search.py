@@ -7,6 +7,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
+load_dotenv(".env.secret", override=True)
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 COLLECTION_NAME = os.getenv("PG_VECTOR_COLLECTION_NAME", "rag_documents")

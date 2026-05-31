@@ -7,6 +7,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_postgres import PGVector
 
 load_dotenv()
+load_dotenv(".env.secret", override=True)
 
 PDF_PATH = os.getenv("PDF_PATH")
 DATABASE_URL = os.getenv("DATABASE_URL")
